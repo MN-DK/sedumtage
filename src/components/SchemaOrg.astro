@@ -1,0 +1,122 @@
+---
+export interface Props {
+  type: 'website' | 'article';
+  title: string;
+  description: string;
+  url: string;
+  datePublished?: string;
+  dateModified?: string;
+  breadcrumbs?: { name: string; url: string }[];
+  faq?: { question: string; answer: string }[];
+}
+
+const { type, title, description, url, datePublished, dateModified, breadcrumbs, faq } = Astro.props;
+
+const siteUrl = 'https://sedumtage.dk';
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "Sedumtage.dk",
+      "description": "Danmarks vidensportal om grønne tage og sedumtage",
+      "inLanguage": "da-DK",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${siteUrl}/blog?s={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      "name": "Sedumtage.dk",
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/logo.png`
+      },
+      "sameAs": [
+        "https://nordic-rooftop.dk"
+      ]
+    }
+  ]
+};
+
+const articleSchema = type === 'article' ? {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": `${url}#article`,
+      "headline": title,
+      "description": description,
+      "url": url,
+      "datePublished": datePublished,
+      "dateModified": dateModified ?? datePublished,
+      "author": {
+        "@type": "Organization",
+        "name": "Sedumtage.dk",
+        "url": siteUrl
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": `${siteUrl}/#organization`,
+        "name": "Sedumtage.dk",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${siteUrl}/logo.png`
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": url
+      },
+      "inLanguage": "da-DK"
+    },
+    ...(breadcrumbs ? [{
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Forside",
+          "item": siteUrl
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": `${siteUrl}/blog`
+        },
+        ...breadcrumbs.map((crumb, i) => ({
+          "@type": "ListItem",
+          "position": i + 3,
+          "name": crumb.name,
+          "item": crumb.url
+        }))
+      ]
+    }] : []),
+    ...(faq && faq.length > 0 ? [{
+      "@type": "FAQPage",
+      "mainEntity": faq.map(item => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
+    }] : [])
+  ]
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}

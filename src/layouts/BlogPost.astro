@@ -5,17 +5,39 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  slug: string;
+  faq?: { question: string; answer: string }[];
+};
 
-const { title, description, pubDate, updatedDate, category } = Astro.props;
+const { title, description, pubDate, updatedDate, category, slug, faq } = Astro.props;
+
+const siteUrl = 'https://sedumtage.dk';
+const articleUrl = `${siteUrl}/blog/${slug}`;
 ---
 
 <html lang="da">
   <head>
-    <BaseHead title={`${title} | Sedumtage.dk`} description={description} />
+    <BaseHead
+      title={`${title} | Sedumtage.dk`}
+      description={description}
+      type="article"
+      datePublished={pubDate.toISOString()}
+      dateModified={updatedDate?.toISOString()}
+      breadcrumbs={[{ name: title, url: articleUrl }]}
+      faq={faq}
+    />
   </head>
   <body>
     <Header />
+
+    <nav class="breadcrumb" aria-label="Brødkrummer">
+      <ol>
+        <li><a href="/" title="Gå til forsiden">Forside</a></li>
+        <li><a href="/blog" title="Se alle guides om sedumtage">Guides</a></li>
+        <li aria-current="page">{title}</li>
+      </ol>
+    </nav>
 
     <article>
       <div class="article-hero">
@@ -24,7 +46,7 @@ const { title, description, pubDate, updatedDate, category } = Astro.props;
           <h1>{title}</h1>
           <p class="article-desc">{description}</p>
           <div class="article-meta">
-            <FormattedDate date={pubDate} />
+            Udgivet <FormattedDate date={pubDate} />
             {updatedDate && (
               <span> · Opdateret <FormattedDate date={updatedDate} /></span>
             )}
@@ -39,7 +61,7 @@ const { title, description, pubDate, updatedDate, category } = Astro.props;
       <div class="article-cta">
         <div class="cta-box">
           <p>Klar til at gå fra viden til handling? Beregn prisen på dit sedumtag.</p>
-          <a href="https://nordic-rooftop.dk/udregn-tilbud/" target="_blank" rel="noopener">
+          <a href="https://nordic-rooftop.dk/udregn-tilbud/" target="_blank" rel="noopener" title="Beregn pris på sedumtag hos Nordic Rooftop">
             Beregn din pris →
           </a>
         </div>
@@ -51,6 +73,24 @@ const { title, description, pubDate, updatedDate, category } = Astro.props;
 </html>
 
 <style>
+.breadcrumb {
+  background: var(--cream);
+  padding: 0.75rem 2.5rem;
+  border-bottom: 1px solid var(--sand);
+}
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.breadcrumb ol li::after { content: '›'; margin-left: 0.5rem; }
+.breadcrumb ol li:last-child::after { content: ''; }
+.breadcrumb a { color: var(--moss); transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--terracotta); }
+
 .article-hero {
   background: var(--forest);
   padding: 4rem 2.5rem 3rem;
@@ -64,36 +104,18 @@ const { title, description, pubDate, updatedDate, category } = Astro.props;
   background: var(--cream);
   clip-path: ellipse(55% 100% at 50% 100%);
 }
-.article-hero-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
+.article-hero-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
 .article-hero .pill { margin-bottom: 1rem; }
 .article-hero h1 {
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 4vw, 2.6rem);
-  color: var(--cream);
-  line-height: 1.2;
-  margin-bottom: 0.75rem;
+  color: var(--cream); line-height: 1.2; margin-bottom: 0.75rem;
 }
 .article-desc {
-  font-size: 1rem;
-  color: rgba(245,240,232,0.7);
-  max-width: 560px;
-  margin-bottom: 1rem;
-  font-weight: 300;
+  font-size: 1rem; color: rgba(245,240,232,0.7);
+  max-width: 560px; margin-bottom: 1rem; font-weight: 300;
 }
-.article-meta {
-  font-size: 0.78rem;
-  color: rgba(245,240,232,0.4);
-  font-weight: 400;
-}
+.article-meta { font-size: 0.78rem; color: rgba(245,240,232,0.4); }
 
-.article-cta {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
+.article-cta { max-width: 720px; margin: 0 auto; padding: 0 2rem 4rem; }
 </style>
