@@ -1,114 +1,118 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+<html lang="da">
+  <head>
+    <BaseHead
+      title="Guides om sedumtage | Sedumtage.dk"
+      description="Alle vores guides, vejledninger og artikler om sedumtage. Find svar på dine spørgsmål om pris, installation, vedligeholdelse og meget mere."
+    />
+  </head>
+  <body>
+    <Header />
+
+    <div class="blog-hero">
+      <div class="blog-hero-inner">
+        <p class="hero-tag">Vidensbank</p>
+        <h1>Guides & artikler</h1>
+        <p>Alt hvad du behøver at vide om sedumtage — samlet på ét sted.</p>
+      </div>
+    </div>
+
+    <section class="blog-list">
+      <div class="section-label">Alle artikler</div>
+      {posts.map((post, i) => (
+        <a href={`/blog/${post.id}`} class="blog-row" title={`Læs: ${post.data.title}`}>
+          <span class="row-num">0{i + 1}</span>
+          <span class="row-cat">{post.data.category ?? 'Guide'}</span>
+          <span class="row-content">
+            <span class="row-title">{post.data.title}</span>
+            <span class="row-desc">{post.data.description}</span>
+          </span>
+          <span class="row-arrow">→</span>
+        </a>
+      ))}
+    </section>
+
+    <div class="cta-band">
+      <h3>Klar til at få et sedumtag? Beregn din pris på 2 minutter.</h3>
+      <a href="https://nordic-rooftop.dk/udregn-tilbud/" target="_blank" rel="noopener" title="Beregn pris på sedumtag hos Nordic Rooftop">Gå til Nordic Rooftop →</a>
+    </div>
+
+    <Footer />
+  </body>
 </html>
+
+<style>
+.blog-hero {
+  background: var(--forest);
+  padding: 4rem 2.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.blog-hero::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 50px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.blog-hero-inner { max-width: 760px; position: relative; z-index: 1; }
+.hero-tag {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+  color: var(--sage); text-transform: uppercase; margin-bottom: 1rem;
+}
+.blog-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--cream); margin-bottom: 0.75rem;
+}
+.blog-hero p { font-size: 1rem; color: rgba(245,240,232,0.7); font-weight: 300; }
+
+.blog-list {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem 5rem;
+}
+
+.blog-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--sand);
+  transition: background 0.15s;
+}
+.blog-row:first-of-type { border-top: 1px solid var(--sand); }
+.blog-row:hover .row-title { color: var(--moss); }
+
+.row-num {
+  font-size: 0.72rem; color: var(--sage);
+  font-weight: 500; width: 28px; flex-shrink: 0; padding-top: 3px;
+}
+.row-cat {
+  font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); width: 90px; flex-shrink: 0; font-weight: 400; padding-top: 3px;
+}
+.row-content { flex: 1; display: flex; flex-direction: column; gap: 0.3rem; }
+.row-title {
+  font-family: var(--font-serif); font-size: 1.05rem;
+  color: var(--dark); transition: color 0.2s; line-height: 1.3;
+}
+.row-desc { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.5; }
+.row-arrow { color: var(--terracotta); font-size: 0.8rem; flex-shrink: 0; padding-top: 3px; }
+
+@media (max-width: 600px) {
+  .row-cat { display: none; }
+  .blog-list { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
