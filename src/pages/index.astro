@@ -1,49 +1,289 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const featured = posts[0];
+const rest = posts.slice(1, 3);
+const all = posts.slice(1);
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang="da">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-tag">Danmarks vidensportal om grønne tage</p>
+        <h1>Alt om <em>sedumtage</em> —<br>guides, priser og råd</h1>
+        <p>Vi hjælper dig med at forstå, planlægge og vedligeholde dit sedumtag. Uanset om du er privat eller erhverv.</p>
+        <div class="hero-btns">
+          <a href="/blog" class="btn-primary">Se alle guides</a>
+          <a href="/blog/sedumtag-pris" class="btn-ghost">Hvad koster det?</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="featured">
+      <div class="section-label">Udvalgte artikler</div>
+      <div class="featured-grid">
+        {featured && (
+          <a href={`/blog/${featured.slug}`} class="card-big">
+            <div class="card-big-content">
+              <div class="card-cat">{featured.data.category ?? 'Guide'}</div>
+              <h2>{featured.data.title}</h2>
+              <p>{featured.data.description}</p>
+              <div class="read-more">Læs guide →</div>
+            </div>
+          </a>
+        )}
+        {rest.map(post => (
+          <a href={`/blog/${post.slug}`} class="card-small">
+            <span class="pill">{post.data.category ?? 'Guide'}</span>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+            <div class="read-more">Læs mere →</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- TOPICS -->
+    <section class="topics">
+      <div class="section-label light">Emner</div>
+      <div class="topics-grid">
+        <a href="/blog/hvad-er-et-sedumtag" class="topic">
+          <div class="topic-icon">
+            <svg viewBox="0 0 28 28" fill="none" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 22 C14 22 6 16 6 10 C6 6.7 9 4 12 5 C13 5.4 13.6 6 14 7 C14.4 6 15 5.4 16 5 C19 4 22 6.7 22 10 C22 16 14 22 14 22Z"/>
+            </svg>
+          </div>
+          <h4>Hvad er sedum?</h4>
+          <p>Plantetyper, egenskaber og hvorfor sedum er ideelt til tage</p>
+        </a>
+        <a href="/blog/installation-sedumtag" class="topic">
+          <div class="topic-icon">
+            <svg viewBox="0 0 28 28" fill="none" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20 L14 8 L24 20"/>
+              <path d="M7 20 L7 14 M21 20 L21 14"/>
+              <path d="M4 20 L24 20"/>
+            </svg>
+          </div>
+          <h4>Installation</h4>
+          <p>Opbygning, vægt, hældning og krav til underlag</p>
+        </a>
+        <a href="/blog/vedligeholdelse-sedumtag" class="topic">
+          <div class="topic-icon">
+            <svg viewBox="0 0 28 28" fill="none" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="14" cy="14" r="3"/>
+              <path d="M14 4 L14 7 M14 21 L14 24 M4 14 L7 14 M21 14 L24 14"/>
+              <path d="M7 7 L9.5 9.5 M18.5 18.5 L21 21 M21 7 L18.5 9.5 M9.5 18.5 L7 21"/>
+            </svg>
+          </div>
+          <h4>Vedligeholdelse</h4>
+          <p>Gødning, ukrudt og hvad der kræves af dig</p>
+        </a>
+        <a href="/blog/sedumtag-pris" class="topic">
+          <div class="topic-icon">
+            <svg viewBox="0 0 28 28" fill="none" stroke="#7A9E7E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="7" width="18" height="14" rx="1.5"/>
+              <path d="M9 7 L9 5 M19 7 L19 5 M5 12 L23 12"/>
+              <path d="M10 16.5 L13 16.5 M15 16.5 L18 16.5"/>
+            </svg>
+          </div>
+          <h4>Priser & økonomi</h4>
+          <p>Hvad koster det, og hvad kan du spare på sigt?</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ALLE ARTIKLER -->
+    <section class="articles">
+      <div class="section-label">Alle artikler</div>
+      <div class="articles-list">
+        {all.map((post, i) => (
+          <a href={`/blog/${post.slug}`} class="article-row">
+            <span class="art-num">0{i + 2}</span>
+            <span class="art-cat">{post.data.category ?? 'Guide'}</span>
+            <span class="art-title">{post.data.title}</span>
+            <span class="art-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <div class="cta-band">
+      <h3>Klar til at få et sedumtag? Beregn din pris på 2 minutter.</h3>
+      <a href="https://nordic-rooftop.dk/udregn-tilbud/" target="_blank" rel="noopener">Gå til Nordic Rooftop →</a>
+    </div>
+
+    <Footer />
+  </body>
 </html>
+
+<style>
+/* HERO */
+.hero {
+  background: var(--forest);
+  padding: 5rem 2.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 45%;
+  background: var(--moss);
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  opacity: 0.4;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 60px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-inner { max-width: 760px; position: relative; z-index: 1; }
+.hero-tag {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+  color: var(--sage); text-transform: uppercase; margin-bottom: 1.2rem;
+}
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  color: var(--cream); line-height: 1.15; margin-bottom: 1.2rem;
+}
+.hero h1 em { font-style: italic; color: var(--sage); }
+.hero p {
+  font-size: 1rem; color: rgba(245,240,232,0.75);
+  line-height: 1.7; max-width: 520px; margin-bottom: 2rem; font-weight: 300;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--terracotta); color: var(--cream);
+  padding: 0.75rem 1.8rem; font-size: 0.88rem; font-weight: 500; border-radius: 2px;
+}
+.btn-ghost {
+  border: 1px solid rgba(245,240,232,0.3); color: var(--cream);
+  padding: 0.75rem 1.8rem; font-size: 0.88rem; font-weight: 400; border-radius: 2px;
+}
+
+/* FEATURED */
+.featured { padding: 4rem 2.5rem; background: var(--cream); }
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 1.5rem;
+}
+.card-big {
+  background: var(--forest); border-radius: 4px; padding: 2.5rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 340px; position: relative; overflow: hidden;
+  transition: opacity 0.2s;
+}
+.card-big:hover { opacity: 0.92; }
+.card-big::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(160deg, var(--moss) 0%, var(--forest) 60%);
+  opacity: 0.85;
+}
+.card-big-content { position: relative; z-index: 1; }
+.card-cat {
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--sage); font-weight: 500; margin-bottom: 0.6rem;
+}
+.card-big h2 {
+  font-family: var(--font-serif); font-size: 1.5rem;
+  color: var(--cream); line-height: 1.25; margin-bottom: 0.75rem;
+}
+.card-big p { font-size: 0.85rem; color: rgba(245,240,232,0.65); line-height: 1.6; font-weight: 300; }
+.card-small {
+  background: white; border-radius: 4px; padding: 1.5rem;
+  border: 1px solid var(--sand); transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-small:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.card-small h3 {
+  font-family: var(--font-serif); font-size: 1.05rem;
+  color: var(--dark); line-height: 1.3; margin: 0.4rem 0 0.5rem;
+}
+.card-small p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+/* TOPICS */
+.topics { background: var(--forest); padding: 3.5rem 2.5rem; }
+.topics-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;
+}
+.topic {
+  padding: 1.5rem; background: rgba(255,255,255,0.03);
+  transition: background 0.2s;
+}
+.topic:hover { background: rgba(255,255,255,0.07); }
+.topic-icon { width: 28px; height: 28px; margin-bottom: 0.9rem; }
+.topic-icon svg { width: 28px; height: 28px; }
+.topic h4 { font-family: var(--font-serif); font-size: 0.95rem; color: var(--cream); margin-bottom: 0.3rem; }
+.topic p { font-size: 0.75rem; color: var(--sage); font-weight: 300; line-height: 1.5; }
+
+/* ARTICLES */
+.articles { padding: 4rem 2.5rem; background: var(--cream); }
+.articles-list {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--sand);
+}
+.article-row {
+  display: flex; align-items: baseline; gap: 2rem;
+  padding: 1.2rem 0; border-bottom: 1px solid var(--sand);
+}
+.article-row:hover .art-title { color: var(--moss); }
+.art-num { font-size: 0.72rem; color: var(--sage); font-weight: 500; width: 24px; flex-shrink: 0; }
+.art-cat {
+  font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); width: 90px; flex-shrink: 0; font-weight: 400;
+}
+.art-title {
+  font-family: var(--font-serif); font-size: 1rem;
+  color: var(--dark); flex: 1; transition: color 0.2s;
+}
+.art-arrow { color: var(--terracotta); font-size: 0.8rem; }
+
+/* CTA BAND */
+.cta-band {
+  background: var(--terracotta); padding: 3rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.cta-band h3 {
+  font-family: var(--font-serif); font-size: 1.4rem;
+  color: var(--cream); max-width: 480px; line-height: 1.35;
+}
+.cta-band a {
+  background: var(--cream); color: var(--terracotta);
+  padding: 0.75rem 2rem; font-size: 0.88rem;
+  font-weight: 500; border-radius: 2px; white-space: nowrap;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .featured-grid { grid-template-columns: 1fr; }
+  .topics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .hero, .featured, .topics, .articles, .cta-band { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .topics-grid { grid-template-columns: 1fr 1fr; }
+  .art-cat { display: none; }
+}
+</style>

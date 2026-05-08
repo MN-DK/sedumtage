@@ -1,5 +1,2 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
-export const SITE_TITLE = 'Astro Blog';
-export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const SITE_TITLE = 'Sedumtage.dk — Danmarks guide til grønne tage';
+export const SITE_DESCRIPTION = 'Alt om sedumtage: guides, priser, installation og vedligeholdelse. Uafhængig dansk vidensportal om grønne tage.';
