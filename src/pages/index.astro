@@ -39,7 +39,7 @@ const all = posts.slice(1);
       <div class="section-label">Udvalgte artikler</div>
       <div class="featured-grid">
         {featured && (
-          <a href={`/blog/${featured.slug}`} class="card-big">
+          <a href={`/blog/${featured.id}`} class="card-big">
             <div class="card-big-content">
               <div class="card-cat">{featured.data.category ?? 'Guide'}</div>
               <h2>{featured.data.title}</h2>
@@ -49,7 +49,7 @@ const all = posts.slice(1);
           </a>
         )}
         {rest.map(post => (
-          <a href={`/blog/${post.slug}`} class="card-small">
+          <a href={`/blog/${post.id}`} class="card-small">
             <span class="pill">{post.data.category ?? 'Guide'}</span>
             <h3>{post.data.title}</h3>
             <p>{post.data.description}</p>
@@ -113,7 +113,7 @@ const all = posts.slice(1);
       <div class="section-label">Alle artikler</div>
       <div class="articles-list">
         {all.map((post, i) => (
-          <a href={`/blog/${post.slug}`} class="article-row">
+          <a href={`/blog/${post.id}`} class="article-row">
             <span class="art-num">0{i + 2}</span>
             <span class="art-cat">{post.data.category ?? 'Guide'}</span>
             <span class="art-title">{post.data.title}</span>
