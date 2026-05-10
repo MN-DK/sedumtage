@@ -1,0 +1,214 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<html lang="da">
+  <head>
+    <BaseHead
+      title="Om sedumtage.dk — Danmarks vidensportal om grønne tage"
+      description="Sedumtage.dk er en uafhængig dansk vidensportal om sedumtage og grønne tage. Vi skriver guides, vejledninger og artikler baseret på faglig erfaring fra Nordic Rooftop."
+    />
+  </head>
+  <body>
+    <Header />
+
+    <div class="om-hero">
+      <div class="om-hero-inner">
+        <p class="hero-tag">Om os</p>
+        <h1>Vi gør viden om sedumtage tilgængelig for alle</h1>
+        <p>Sedumtage.dk er en uafhængig dansk vidensportal med ét formål: at hjælpe dig med at træffe den rigtige beslutning om grønne tage.</p>
+      </div>
+    </div>
+
+    <div class="om-content">
+
+      <div class="om-section">
+        <h2>Hvad er sedumtage.dk?</h2>
+        <p>Sedumtage.dk er en redaktionel indholdside der samler praktisk, erfaringsbaseret viden om sedumtage og grønne tage på ét sted. Vi skriver guides, prisgennemgange og vejledninger der hjælper private og erhvervskunder med at forstå, planlægge og vedligeholde deres sedumtag.</p>
+        <p>Siden er uafhængig redaktionelt, men drives i samarbejde med <a href="https://nordic-rooftop.dk" target="_blank" rel="noopener" title="Besøg Nordic Rooftop — dansk producent af sedumtage">Nordic Rooftop</a>, der er en dansk producent og leverandør af sedumtage med produktionsanlæg i Kolding.</p>
+      </div>
+
+      <div class="om-section">
+        <h2>Hvem skriver artiklerne?</h2>
+        <div class="author-card">
+          <img
+            src="/michael-nielsen.avif"
+            alt="Michael Nielsen — forfatter og sedumtag-ekspert"
+            width="80"
+            height="80"
+            class="author-thumb"
+          />
+          <div>
+            <h3>Michael Nielsen</h3>
+            <p class="author-role">Uddannet gartner · Marketing hos Nordic Rooftop</p>
+            <p>Michael er uddannet gartner fra 1995 og har siden arbejdet med planter i over 15 år. I dag arbejder han med marketing hos Nordic Rooftop, hvor han til daglig rådgiver kunder om sedumtage. Hans artikler på sedumtage.dk er baseret på konkret faglig erfaring med grønne tage i det danske klima.</p>
+            <a href="/forfatter/michael-nielsen" title="Læs mere om Michael Nielsen" class="author-link">Læs mere om Michael →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="om-section">
+        <h2>Vores redaktionelle principper</h2>
+        <div class="principles-grid">
+          <div class="principle">
+            <div class="principle-icon">
+              <svg viewBox="0 0 28 28" fill="none" stroke="var(--moss)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                <path d="M14 5 L14 23 M5 14 L23 14"/>
+                <circle cx="14" cy="14" r="9"/>
+              </svg>
+            </div>
+            <h4>Faglig baggrund</h4>
+            <p>Vores artikler er skrevet af eller i samarbejde med folk med reel erfaring fra branchen — ikke af generiske AI-tekster.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">
+              <svg viewBox="0 0 28 28" fill="none" stroke="var(--moss)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                <rect x="5" y="5" width="18" height="18" rx="2"/>
+                <path d="M9 14 L12 17 L19 10"/>
+              </svg>
+            </div>
+            <h4>Ærlighed</h4>
+            <p>Vi beskriver både fordele og ulemper ved sedumtage. Vores mål er at hjælpe dig med den rigtige beslutning — ikke at sælge for enhver pris.</p>
+          </div>
+          <div class="principle">
+            <div class="principle-icon">
+              <svg viewBox="0 0 28 28" fill="none" stroke="var(--moss)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                <path d="M14 22 C14 22 6 16 6 10 C6 6.7 9 4 12 5 C13 5.4 13.6 6 14 7 C14.4 6 15 5.4 16 5 C19 4 22 6.7 22 10 C22 16 14 22 14 22Z"/>
+              </svg>
+            </div>
+            <h4>Dansk fokus</h4>
+            <p>Al viden er tilpasset danske forhold — klima, konstruktionskrav og leverandører. Vi skriver ikke generiske internationale guides.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="om-section">
+        <h2>Om Nordic Rooftop</h2>
+        <p>Nordic Rooftop er en dansk producent og leverandør af sedumtage med eget produktionsanlæg i Kolding. De producerer sedummåtter og sedumbakker til private og erhvervskunder i hele Danmark og leverer direkte til dørtrinet.</p>
+        <p>Vil du have et tilbud på dit sedumtag, bestille materialer eller have faglig rådgivning, kan du besøge <a href="https://nordic-rooftop.dk" target="_blank" rel="noopener" title="Besøg Nordic Rooftop">nordic-rooftop.dk</a>.</p>
+      </div>
+
+    </div>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+.om-hero {
+  background: var(--forest);
+  padding: 4rem 2.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.om-hero::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 50px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.om-hero-inner { max-width: 760px; position: relative; z-index: 1; }
+.hero-tag {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+  color: var(--sage); text-transform: uppercase; margin-bottom: 1rem;
+}
+.om-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--cream); margin-bottom: 0.75rem; line-height: 1.2;
+}
+.om-hero p { font-size: 1rem; color: rgba(245,240,232,0.7); font-weight: 300; max-width: 560px; }
+
+.om-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+
+.om-section {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--sand);
+}
+.om-section:last-child { border-bottom: none; }
+
+.om-section h2 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--forest);
+  margin-bottom: 1rem;
+}
+.om-section p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--dark);
+  margin-bottom: 0.75rem;
+  font-weight: 300;
+}
+.om-section a { color: var(--moss); text-decoration: underline; text-underline-offset: 3px; }
+
+.author-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  background: white;
+  border: 1px solid var(--sand);
+  border-radius: 4px;
+  padding: 1.5rem;
+  flex-wrap: wrap;
+}
+.author-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--sage);
+  flex-shrink: 0;
+}
+.author-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--forest);
+  margin-bottom: 0.2rem;
+}
+.author-role {
+  font-size: 0.8rem !important;
+  color: var(--muted) !important;
+  margin-bottom: 0.75rem !important;
+}
+.author-link {
+  font-size: 0.82rem;
+  color: var(--terracotta) !important;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.principle {
+  background: white;
+  border: 1px solid var(--sand);
+  border-radius: 4px;
+  padding: 1.25rem;
+}
+.principle-icon { margin-bottom: 0.75rem; }
+.principle h4 {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--forest);
+  margin-bottom: 0.4rem;
+}
+.principle p { font-size: 0.82rem !important; color: var(--muted) !important; line-height: 1.55; }
+
+@media (max-width: 600px) {
+  .principles-grid { grid-template-columns: 1fr; }
+  .om-hero, .om-content { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>

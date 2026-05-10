@@ -1,0 +1,91 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const lastUpdated = "9. maj 2026";
+---
+
+<html lang="da">
+  <head>
+    <BaseHead
+      title="Privatlivspolitik | Sedumtage.dk"
+      description="Læs om hvordan sedumtage.dk behandler dine personoplysninger og bruger cookies."
+    />
+  </head>
+  <body>
+    <Header />
+
+    <div class="policy-hero">
+      <div class="policy-hero-inner">
+        <p class="hero-tag">Juridisk</p>
+        <h1>Privatlivspolitik</h1>
+        <p>Sidst opdateret: {lastUpdated}</p>
+      </div>
+    </div>
+
+    <div class="policy-content prose">
+
+      <h2>1. Dataansvarlig</h2>
+      <p>Sedumtage.dk drives i samarbejde med Nordic Rooftop. Siden indsamler ikke personoplysninger direkte, og der er ingen brugerkonti, kontaktformularer eller betalingsprocessering på dette website.</p>
+
+      <h2>2. Hvilke oplysninger indsamler vi?</h2>
+      <p>Sedumtage.dk indsamler ikke personoplysninger direkte. Vi benytter ingen kontaktformularer, nyhedsbrevsformularer eller brugerregistrering.</p>
+      <p>Vi anvender dog tredjeparts-tjenester der kan indsamle anonyme brugsdata — se afsnit 3 nedenfor.</p>
+
+      <h2>3. Tredjeparts-tjenester</h2>
+      <p><strong>Cloudflare:</strong> Vores website hostes på Cloudflare Pages. Cloudflare kan indsamle anonyme tekniske data om besøg, herunder IP-adresser i anonymiseret form, til sikkerhedsformål. Læs <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflares privatlivspolitik</a>.</p>
+      <p><strong>Nordic Rooftop:</strong> Links fra sedumtage.dk fører til nordic-rooftop.dk, som har sin egen privatlivspolitik. Vi er ikke ansvarlige for behandlingen af personoplysninger på tredjepartswebsites.</p>
+
+      <h2>4. Cookies</h2>
+      <p>Sedumtage.dk anvender ikke tracking-cookies eller markedsføringscookies. Vi sætter ingen cookies fra analytics-tjenester som Google Analytics eller lignende.</p>
+      <p>Cloudflare kan sætte tekniske cookies til sikkerhedsformål. Disse er nødvendige for at websitet fungerer korrekt og kræver ikke samtykke.</p>
+
+      <h2>5. Dine rettigheder</h2>
+      <p>Da vi ikke behandler personoplysninger direkte, er der ingen personoplysninger at anmode om indsigt i, sletning af eller rettelse af.</p>
+      <p>Har du spørgsmål til behandlingen af data i forbindelse med et køb eller en forespørgsel til Nordic Rooftop, skal du kontakte dem direkte på <a href="https://nordic-rooftop.dk" target="_blank" rel="noopener">nordic-rooftop.dk</a>.</p>
+
+      <h2>6. Ændringer i privatlivspolitikken</h2>
+      <p>Vi forbeholder os retten til at opdatere denne privatlivspolitik. Datoen øverst på siden angiver hvornår politikken sidst blev opdateret.</p>
+
+      <h2>7. Kontakt</h2>
+      <p>Har du spørgsmål til denne privatlivspolitik, kan du kontakte os via <a href="https://nordic-rooftop.dk" target="_blank" rel="noopener">Nordic Rooftop</a>.</p>
+
+    </div>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+.policy-hero {
+  background: var(--forest);
+  padding: 3rem 2.5rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.policy-hero::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 50px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.policy-hero-inner { max-width: 760px; position: relative; z-index: 1; }
+.hero-tag {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+  color: var(--sage); text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.policy-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--cream); margin-bottom: 0.5rem;
+}
+.policy-hero p { font-size: 0.85rem; color: rgba(245,240,232,0.5); font-weight: 300; }
+
+.policy-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+</style>
