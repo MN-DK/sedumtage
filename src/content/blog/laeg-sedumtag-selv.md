@@ -45,7 +45,7 @@ Er du i tvivl om konstruktionens bæreevne, så få en tømrer til at vurdere de
 
 ## Trin 1: Mål og planlæg
 
-M�l tagfladen og tegn en simpel skitse. Beregn hvor mange bakker du skal bruge — sedumbakker er typisk 60×40 cm, svarende til 0,24 m² pr. bakke.
+Mål tagfladen og tegn en simpel skitse. Beregn hvor mange bakker du skal bruge — sedumbakker er typisk 60×40 cm, svarende til 0,24 m² pr. bakke.
 
 Eksempel: 20 m² ÷ 0,24 m² = 84 bakker. Bestil 90 bakker for at have lidt ekstra.
 
