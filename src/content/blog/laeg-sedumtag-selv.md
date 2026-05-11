@@ -16,11 +16,11 @@ At lægge et sedumtag selv er et overkommeligt weekendprojekt for de fleste. Med
 
 Gennemgå disse punkter inden du bestiller materialer:
 
-- [ ] **Tagkonstruktionen** kan bære 80–120 kg pr. m² (sedumbakker + vand)
-- [ ] **Tagmembranen** er hel, vandtæt og i god stand
-- [ ] **Hældningen** er under 15 grader
-- [ ] **Afvandingen** fungerer og tagrenderne er rene
-- [ ] Du har **mål på tagfladen** (længde × bredde i m²)
+- **Tagkonstruktionen** kan bære 80–120 kg pr. m² (sedumbakker + vand)
+- **Tagmembranen** er hel, vandtæt og i god stand
+- **Hældningen** er under 15 grader
+- **Afvandingen** fungerer og tagrenderne er rene
+- **Du har **mål på tagfladen** (længde × bredde i m²)
 
 Er du i tvivl om konstruktionens bæreevne, så få en tømrer til at vurdere den inden du går videre.
 
