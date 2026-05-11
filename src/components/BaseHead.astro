@@ -16,7 +16,7 @@ export interface Props {
 const {
   title,
   description,
-  image = '/og-default.jpg',
+  image = '/og-image.webp',
   type = 'website',
   datePublished,
   dateModified,
@@ -41,6 +41,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://sedumtag
 <!-- Google Search Console verificering -->
 <meta name="google-site-verification" content="FjBn_dHE7FFGxuaNZrX9uP7Jw1RN9XALG1LjY9v0xP0" />
 
+<!-- Midlertidigt: ingen indeksering mens siden er under opbygning -->
+<meta name="robots" content="noindex, nofollow" />
 
 <!-- Primary Meta -->
 <title>{title}</title>
