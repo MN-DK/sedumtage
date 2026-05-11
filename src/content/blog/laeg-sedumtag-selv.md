@@ -20,7 +20,7 @@ Gennemgå disse punkter inden du bestiller materialer:
 - **Tagmembranen** er hel, vandtæt og i god stand
 - **Hældningen** er under 15 grader
 - **Afvandingen** fungerer og tagrenderne er rene
-- **Du har **mål på tagfladen** (længde × bredde i m²)
+- Du har **mål på tagfladen** (længde × bredde i m²)
 
 Er du i tvivl om konstruktionens bæreevne, så få en tømrer til at vurdere den inden du går videre.
 
