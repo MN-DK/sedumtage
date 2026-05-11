@@ -38,8 +38,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://sedumtag
 <!-- Canonical -->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Midlertidigt: ingen indeksering mens siden er under opbygning -->
-<meta name="robots" content="noindex, nofollow" />
+<!-- Google Search Console verificering -->
+<meta name="google-site-verification" content="FjBn_dHE7FFGxuaNZrX9uP7Jw1RN9XALG1LjY9v0xP0" />
+
 
 <!-- Primary Meta -->
 <title>{title}</title>
